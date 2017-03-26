@@ -1,2 +1,2 @@
 # Octopus
-Pipeline for different gene expression analysis using negative biomal Generalized Linear Model
+Pipeline for different gene expression analysis using negative binomial Generalized Linear Model
