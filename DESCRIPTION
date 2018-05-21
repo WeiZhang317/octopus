@@ -1,0 +1,19 @@
+Package: octopus
+Type: Package
+Version: 0.3.6
+Date: 2018-05-21
+Title: Tools for GLM NB analysis
+Authors@R: c(person("Wei Zhang", "Developer", role = c("aut", "cre"), email = "vivianzhang317@gmail.com")
+            ,person("Jason J. Corwin", "Developer", role = c("aut"), email = "Jason.Corwin@Colorado.edu")
+            ,person("Daniel J. Kliebenstein", "Developer", role = c("aut"), email = "kliebenstein@ucdavis.edu")
+            ,person("Guocai Chen", "Developer", role = c("ctb"), email = "guocai.chen@gmail.com"))
+Author: Wei Zhang [aut, cre],
+  Jason J. Corwin [aut],
+  Daniel J. Kliebenstein [aut],
+  Guocai Chen [ctb]
+Maintainer: Wei Zhang<vivianzhang317@gmail.com>
+Depends: R (>= 3.3.2), Rbowtie,MASS,lsmeans,R.utils,digest,tools,edgeR
+Description: Tools for GLM NB analysis
+License: GPL-2
+LazyData: TRUE
+RoxygenNote: 6.0.1

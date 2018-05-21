@@ -1,0 +1,9 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.DS_Store
+octopus.Rproj
+results*
+seq_data
+tmp
