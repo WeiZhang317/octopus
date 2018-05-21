@@ -7,11 +7,11 @@ Pipeline for different gene expression analysis using negative biomal Generalize
 
 ## Document
 
-[PDF](https://github.com/WeiZhang317/octopus/blob/master/octopus_document.pdf)
+[Dowload PDF](https://github.com/WeiZhang317/octopus/raw/master/octopus_document.pdf)
 
-## Dowload binary package
+## binary package
 
-[binary package](https://github.com/WeiZhang317/octopus/blob/master/octopus_0.3.6.tgz)
+[Dowload binary package](https://github.com/WeiZhang317/octopus/raw/master/octopus_0.3.6.tgz)
 
 
 ## Citations
