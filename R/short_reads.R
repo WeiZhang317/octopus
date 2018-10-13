@@ -64,8 +64,17 @@ octopus.short_reads <- function(seq_files,references,...,type="single",dist_dir=
   dir.create(short_reads_path, showWarnings = FALSE, recursive = TRUE )
   dir.create("tmp", showWarnings = FALSE, recursive = TRUE )
 
+  refs_sign_str <- NULL
+  for (str in references) {
+    if(is.null(refs_sign_str)){
+      refs_sign_str <- readChar(str,10000000)
+    }else{
+      refs_sign_str <- c(refs_sign_str,readChar(str,10000000))
+    }
+  }
+
   # detect changing of input data
-  signs <- list(refs=sha1(readChar(references,10000000)),seq_files=sha1(seq_files),ext_args=sha1(list(...)),type=type) # TODO list(2) -> list(...)
+  signs <- list(refs=sha1(refs_sign_str),seq_files=sha1(seq_files),ext_args=sha1(list(...)),type=type) # TODO list(2) -> list(...)
   signs_file <- paste0(short_reads_path,"sha1_signatures")
   if(!file.exists(signs_file)){ write.csv(signs,signs_file,row.names = FALSE) }
   signs_old <- read.csv(signs_file)
@@ -162,7 +171,15 @@ octopus.short_reads.merge <- function(src_dir,dist_dir="results/"){
 octopus.bowtie_build <- function(references,dist_dir="results/"){
   # sha1 signature
   # build index
-  refs_sign <- sha1(readChar(references,10000000))
+  refs_sign_str <- NULL
+  for (str in references) {
+    if(is.null(refs_sign_str)){
+      refs_sign_str <- readChar(str,10000000)
+    }else{
+      refs_sign_str <- c(refs_sign_str,readChar(str,10000000))
+    }
+  }
+  refs_sign <- sha1(refs_sign_str)
   refs <- paste0(dist_dir,"/reusing/refs/",refs_sign)
   if(dir.exists(refs)){
     print(paste("reusing bowtie index ",refs," for references ",references))
@@ -272,6 +289,21 @@ tutorial.octopus.short_reads <- function(topic=NULL){
                         # ,y=TRUE # more sensitive but much slower, see http://bowtie-bio.sourceforge.net/manual.shtml#bowtie-options-y
                         ,type="paired"
                         ,dist_dir="results_paired/"
+    )
+
+    # multiple referencing files
+    references  <- c("seq_data/ref_sequences/Botrytisfusarivirus1.txt","seq_data/ref_sequences/BotrytisHypovirus1.txt")
+    seq_files <- data.frame(seq_file=c("seq_data/1_AACGTGAT_L003_R1_001.fastq.gz","seq_data/1_AACGTGAT_L007_R1_001.fastq","seq_data/3_AACGTGAT_L003_R1_001.fastq.gz")
+                            ,sample_name=c("sample1","sample2","sample3")
+                            ,stringsAsFactors = FALSE)
+    row.names(seq_files) <- seq_files$sample_name
+
+    octopus.short_reads(seq_files,references
+                        ,p=3 # number of alignment threads to launch
+                        ,`phred33-quals`=TRUE # input quals are Phred+33
+                        ,t=TRUE # print wall-clock time taken by search phases
+                        ,quiet=TRUE # print nothing but the alignments
+                        ,trim5=10 # trim <int> bases from 5' (left) end of reads
     )
 
 
