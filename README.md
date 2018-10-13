@@ -19,4 +19,8 @@ Pipeline for different gene expression analysis using negative biomal Generalize
 
 [See LICENSE](https://github.com/WeiZhang317/octopus/blob/master/LICENSE)
 
+## Change Log
+
+[See Change Log](https://github.com/WeiZhang317/octopus/blob/master/CHANGELOG.md)
+
 
